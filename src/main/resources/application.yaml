@@ -1,0 +1,24 @@
+spring:
+  kafka:
+    bootstrap-servers: vehiclehub.servicebus.windows.net:9093
+  client-id: first-producer
+    properties:
+      schema.registry.url: http://localhost:9080
+      sasl.jaas.config: org.apache.kafka.common.security.plain.PlainLoginModule required username="$ConnectionString" password="Endpoint=sb://vehiclehub.servicebus.windows.net/;SharedAccessKeyName=receive;SharedAccessKey=QaXMNgGWc87lyrcMATLnwhxDiq887DzXYrYbQwVydek=;EntityPath=clickstream";
+      sasl.mechanism: PLAIN
+      security.protocol: SASL_SSL
+    consumer:
+      group-id: group_id
+      properties:
+        spring.json:
+          use.type.headers: false
+          value.default.type: com.example.demo.User
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      properties:
+        interceptor.classes: io.confluent.monitoring.clients.interceptor.MonitoringProducerInterceptor
+server:
+  port: 8080
+topic:
+  name: clickstream
