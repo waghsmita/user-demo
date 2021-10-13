@@ -20,7 +20,7 @@ public class Receiver {
 
   @KafkaListener(topics = "clickstream")
   public void receive(String payload) {
-    LOGGER.info("received payload='{}'", payload);
+    LOGGER.info("received payloads='{}'", payload);
     latch.countDown();
   }
 }

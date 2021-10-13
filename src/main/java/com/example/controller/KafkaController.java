@@ -20,5 +20,6 @@ public class KafkaController {
     public void sendData(@RequestParam("name") String message) {
     	kafkaProducer.send(message);
         System.out.println("sender"+message);
+        //adding for push command 
     }
 }
